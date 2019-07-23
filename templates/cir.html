@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+        河南嘉禾智慧科技农业-农产品流通
+{% endblock %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block menu %}
+        <div class="nav well">
+            <div class="container">
+                <div class="row">
+                    <div class="logo col-md-4">
+                        <a href="{% url 'jh:index' %}"><img src="{% static '/htmlimg/logo.png' %}" alt=""></a>
+                    </div>
+                    <div class="col-md-8 pull-right">
+                        <ul class="menu">
+                            <li><a href="{% url 'jh:index' %}" >首页</a></li>
+                            <li><a href="{% url 'jh:finance' %}" >农业金融</a></li>
+                            <li><a href="{% url 'goods:goods' %}" >农资团购</a></li>
+                            <li><a href="{% url 'jh:news' 1 1 %}">农业资讯</a></li>
+                            <li><a href="{% url 'teach:teach' %}">农技服务</a></li>
+                            <li><a href="{% url 'cir:cir' %}"  class="seclted">农产品流通</a></li>
+                            <li><a href="{% url 'jh:company' %}">关于我们</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+{% endblock %}
+
+{% block bann %}
+<div class="" style="display: flex;justify-content: center;align-items: center">
+    <img  src="/static/htmlimg/14588998158469.jpg" >
+</div>
+{% endblock %}
+
+{% block content %}
+<link href="/static/css/common.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/javascript/coursetab.js"></script>
+
+  <!--banner切换结束-->
+  <!--推荐-->
+  <div class="cai-jing" style="height: 400px">
+     <p><span>优选采购商</span><a href="{% url 'cir:cir_detail' 1 %}" target="_blank">更多>></a></p>
+     <div class="cai-j">
+         {% for pur in purchaser %}
+             <a href="{% url 'cir:cir_detail' pur.id %}" target="_blank"><img src="{{ pur.pic.url }}" alt="{{ pur.name }}"></a>
+         {% endfor %}
+
+         <div class="clear"></div>
+     </div>
+  </div>
+  <!--推荐结束-->
+
+  <!--农产品采购开始-->
+    <div class="cai-t"><span>农产品采购</span></div>
+    <div class="cai-content" style="height: 460px">
+       <ul>
+           {% for pp in purpro %}
+           <li>
+           <a href="" target="_blank"><img src="{{ pp.pic.url }}" alt=""></a>
+               <p><a href="" target="_blank">【{{ pp.purchaser }}】{{ pp.title }}</a></p>
+               <p>{{ pp.desc }}</p>
+           </li>
+           {% endfor %}
+       </ul>
+       <div class="clear"></div>
+       <!--<div class="fenye"><a href="">上一页</a><a href="" class="seclted">1</a><a href="">2</a><a href="">3</a><a href="">4</a><a href="">5</a><span>···</span><a href="">18</a><a href="">下一页</a></div>-->
+  </div>
+   <!--农产品采购结束-->
+
+{% endblock %}
+
+

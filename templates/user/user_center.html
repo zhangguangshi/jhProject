@@ -1,0 +1,247 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>个人中心</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/commen.css' %}">
+    <script type="text/javascript" src="{% static 'javascript/jquery.js' %}"></script>
+</head>
+<style>
+    .inner {
+        position: relative;
+        width: 50px;
+        height: 25px;
+        background: linear-gradient(dimgray, silver);
+        border-radius: 25px;
+        box-shadow: 0 0 0 15px rgba(255, 255, 255, 0.7);
+    }
+
+    .inner::before {
+        content: 'OFF';
+        font-size: 12px;
+        color: #808080;
+        line-height: 25px;
+        text-align: center;
+        position: absolute;
+        left: 0px;
+        width: 25px;
+        height: 25px;
+        background: radial-gradient(whitesmoke, silver);
+        border-radius: 13px;
+        transition: left 0.5s ease-in-out;
+    }
+
+    .toggle {
+        position: absolute;
+        width: 50px;
+        height: 25px;
+        z-index: 3;
+        cursor: pointer;
+        filter: opacity(0%);
+    }
+
+    .toggle:checked~.inner::before {
+        content: "ON";
+        color: limegreen;
+        left: 50%;
+    }
+
+    .toggle:checked~.inner {
+        background: linear-gradient(green, limegreen);
+    }
+</style>
+
+<body>
+    <div id="wraptop">
+        <div class="top_user container">
+            <ul class="top_l">
+                <li><span>嘉禾农业</span></li>
+                <li>个人中心</li>
+            </ul>
+            <ul class="top_r">
+                <li><a href="{% url 'jh:index' %}"><span class="glyphicon glyphicon-home"></span>返回首页</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        {{ name }} <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">退出登录</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container user_info">
+        <div class="row">
+            <div class="col-md-2 info_left"><img src="{% static 'htmlimg/touxiang.jpg' %}">
+                <p><span>{{ name }}</span>，你好</p>
+            </div>
+            <div class="info_middle col-md-3">
+                <h4><span>快速通道</span></h4>
+                <p><span class="glyphicon glyphicon-lock"></span><a href="{% url 'user:update_pwd' %}">修改密码</a></p>
+                <p><span class="glyphicon glyphicon-phone"></span>手机号码：<span>{{ phone }}</span><a href="#">修改</a></p>
+            </div>
+            <div class="info_middle col-md-4">
+                <h4><span>金融申请记录</span></h4>
+                <p><span class="glyphicon glyphicon-map-marker"></span>地址：<span>{{ user.form.adress }}</span></p>
+                <p><span class="glyphicon glyphicon-grain"></span>种植作物：<span>{{ user.form.area }}</span>&nbsp&nbsp&nbsp亩</p>
+                <p><span class="glyphicon glyphicon-yen"></span>申请金额：<span>{{ user.form.money }}</span>&nbsp&nbsp&nbsp元</p>
+            </div>
+            <!-- <div class="info_middle col-md-4">
+                <h4><span>金融申请</span></h4>
+                <p>暂无申请记录</p>
+            </div> -->
+        </div>
+
+    </div>
+    <div class="wrapUser_info">
+        <div class="container user_con">
+            <h2><span>水肥一体化展示平台数据</span></h2>
+            <div class="data">
+                <div class="">
+                    <h3>智能水肥</h3>
+                    <ul>
+                        <li>
+                            <p>液位传感器:<span>1105</span></p>
+                        </li>
+                        <li>
+                            <p>管道压力传感器:<span>935</span></p>
+                        </li>
+                        <li>
+                            <p>土壤PH传感器:<span>19.01</span></p>
+                        </li>
+                        <li>
+                            <p>土壤盐分传感器:<span>19.55</span></p>
+                        </li>
+                        <!-- <li>
+                        <p>主管道流量传感器:<span>77.92</span></p>
+                    </li> -->
+                    </ul>
+                </div>
+                <div class="guangai g1">
+                    <h3>
+                        <span class="title_l">1号灌溉</span>
+                        <div class="on-off">
+                            <input type="checkbox" class="toggle" id="checkbox1" />
+                            <div class="inner" id="inner1"></div>
+                        </div>
+                    </h3>
+                    <ul>
+                        <li>
+                            <p>阀门状态<span class="zt">关闭</span></p>
+                        </li>
+                        <li>
+                            <p>温度：<span>12.1</span></p>
+                        </li>
+                        <li>
+                            <p>流速：<span>12.5</span></p>
+                        </li>
+                        <li>
+                            <p>累计流量：<span>281.2</span></p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="guangai g2">
+                    <h3>
+                        <span class="title_l">2号灌溉</span>
+                        <div class="on-off">
+                            <input type="checkbox" class="toggle" id="checkbox2" />
+                            <div class="inner"></div>
+                        </div>
+                    </h3>
+                    <ul>
+                        <li>
+                            <p>阀门状态<span class="zt">关闭</span></p>
+                        </li>
+                        <li>
+                            <p>温度：<span></span></p>
+                        </li>
+                        <li>
+                            <p>流速：<span></span></p>
+                        </li>
+                        <li>
+                            <p>累计流量：<span></span></p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="guangai g3">
+                    <h3>
+                        <span class="title_l">3号灌溉</span>
+                        <div class="on-off">
+                            <input type="checkbox" class="toggle" id="checkbox3" />
+                            <div class="inner"></div>
+                        </div>
+                    </h3>
+                    <ul>
+                        <li>
+                            <p>阀门状态<span class="zt">关闭</span></p>
+                        </li>
+                        <li>
+                            <p>温度：<span></span></p>
+                        </li>
+                        <li>
+                            <p>流速：<span></span></p>
+                        </li>
+                        <li>
+                            <p>累计流量：<span></span></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container control_m">
+        <h2><span>嘉禾智慧农业视频监控平台</span></h2>
+        <ul class="control">
+            {% for monit in monits %}
+                <li>
+                <div>
+                    <a href="{% url 'user:monit' monit.number %}">
+                        <img src="{{ monit.img.url }}" alt="">
+                    </a>
+                </div>
+                <p><a href="{% url 'user:monit' monit.number %}">{{ monit.title }}</a></p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+<script type="text/javascript">
+    $(function () {
+        $(".toggle").parents().find('.guangai ul li').find('span').not('.zt').html('0');
+        $('#checkbox1').click(function () {
+            if ($("#checkbox1").prop("checked") == true) {
+                $("#checkbox1").parents().find('.g1 ul li').first().find('span').html('打开')
+            } else {
+                $("#checkbox1").prop("checked", false);
+                $("#checkbox1").parents().find('.g1 ul li').first().find('span').html('关闭');
+                $("#checkbox1").parents().find('.g1 ul li').find('span').not('.zt').html('0')
+            }
+        });
+        $('#checkbox2').click(function () {
+            if ($("#checkbox2").prop("checked") == true) {
+                $("#checkbox2").parents().find('.g2 ul li').first().find('span').html('打开')
+            } else {
+                $("#checkbox2").prop("checked", false);
+                $("#checkbox2").parents().find('.g2 ul li').first().find('span').html('关闭');
+                $("#checkbox2").parents().find('.g2 ul li').find('span').not('.zt').html('0')
+            }
+        });
+        $('#checkbox3').click(function () {
+            if ($("#checkbox3").prop("checked") == true) {
+                $("#checkbox3").parents().find('.g3 ul li').first().find('span').html('打开')
+            } else {
+                $("#checkbox3").prop("checked", false);
+                $("#checkbox3").parents().find('.g3 ul li').first().find('span').html('关闭');
+                $("#checkbox3").parents().find('.g3 ul li').find('span').not('.zt').html('0')
+            }
+        })
+    })
+</script>
+
+</html>

@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    河南嘉禾智慧科技农业-农技服务
+{% endblock %}
+
+{% block head %}
+
+{% endblock %}
+  {% block bann %}
+        <div class="banner">
+        <div class="carousel slide center-block" id="myCarousel">
+            <ol class="carousel-indicators">
+                <li class="active" data-target="#myCarousel" data-slide-to="0"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" style="display: flex;justify-content: center;align-items: center">
+
+                <div class="item active" style="width: 100%">
+                    <img src="{% static '/htmlimg/lun01.jpg' %}" style="width: 100%">
+                </div>
+                <div class="item" style="width: 100%">
+                    <img src="{% static '/htmlimg/lun02.jpg' %}"  style="width: 100%">
+                </div>
+                <div class="item" style="width: 100%">
+                    <img src="{% static '/htmlimg/lun03.jpg' %}" style="width: 100%">
+                </div>
+            </div>
+            <a href="#myCarousel" class="left carousel-control" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a href="#myCarousel" class="right carousel-control" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+    </div>
+    {% endblock %}
+{% block menu %}
+        <div class="nav well">
+            <div class="container">
+                <div class="row">
+                    <div class="logo col-md-4">
+                        <a href="{% url 'jh:index' %}"><img src="{% static '/htmlimg/logo.png' %}" alt=""></a>
+                    </div>
+                    <div class="col-md-8 pull-right">
+                        <ul class="menu">
+                            <li><a href="{% url 'jh:index' %}" >首页</a></li>
+                            <li><a href="{% url 'jh:finance' %}" >农业金融</a></li>
+                            <li><a href="{% url 'goods:goods' %}" >农资团购</a></li>
+                            <li><a href="{% url 'jh:news' 1 1 %}">农业资讯</a></li>
+                            <li><a href="{% url 'teach:teach' %}" class="seclted">农技服务</a></li>
+                            <li><a href="{% url 'cir:cir' %}">农产品流通</a></li>
+                            <li><a href="{% url 'jh:company' %}">关于我们</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+{% endblock %}
+
+
+
+{% block content %}
+
+<link href="/static/css/common.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/javascript/coursetab.js"></script>
+
+  <!--banner切换结束-->
+  <div class="course-content" style="height: 1000px;">
+   <!--左侧区域-->
+   <div class="con-l">
+   <!--推荐课程-->
+     <div class="con-l-ct">
+        <div class="t1">
+          <h3>推荐课程</h3>
+          <p><a href="{% url 'teach:video_list' 'recom' %}">更多>></a></p>
+        </div>
+        <div class="t2">
+          <ul class="kc">
+              {% for pop in pop_videos %}
+              <li>
+                  <div class="img2">
+                    <a target="_blank" href="{% url 'teach:video_detail' pop.id %}">
+                    <div class="player"></div>
+                    <img  width="207px" height="137px" src="{{ pop.img.url }}" alt="">
+                  </a>
+                  </div>
+                  <p class="con-text">
+                      <span class="span-l">{{ pop.expert.first.name }}【{{ pop.expert.first.post }}】</span><span class="span-r">{{ pop.times }}</span>
+                  </p>
+                  <h4><a target="_blank" href="{% url 'teach:video_detail' pop.id %}">{{ pop.title }}</a></h4>
+                </li>
+              {% endfor %}
+          </ul>
+        </div>
+     </div>
+     <!--推荐课程结束-->
+     <!--热播课程开始-->
+     <div class="con-l-ct">
+        <div class="t1">
+          <h3>最新课程</h3>
+          <p><a href="{% url 'teach:video_list' 'tests' %}">更多>></a></p>
+        </div>
+        <div class="t2">
+          <ul class="kc">
+              {% for video in videos %}
+              <li>
+                  <div class="img2">
+                  <a target="_blank" href="{% url 'teach:video_detail' video.id %}">
+                    <div class="player"></div>
+                    <img width="207px" height="137px" src="{{ video.img.url }}" alt=""></a>
+                  </div>
+                  <p class="con-text"><span class="span-l">{{ video.expert.first.name }}【{{ video.expert.first.post }}】</span><span class="span-r">{{ video.times }}</span></p>
+                  <h4><a target="_blank" href="{% url 'teach:video_detail' video.id %}">{{ video.title }}</a></h4>
+                </li>
+              {% endfor %}
+              </ul>
+        </div>
+     </div>
+     </div>
+     <!--左侧区域结束-->
+    <!--右侧侧区域开始--> 
+    <div class="con-r">
+     <div class="con-r-zj">
+         <div class="t1">
+            <h3>推荐专家</h3>
+            <p><!--<a href="">更多>></a>--></p>
+         </div>
+         <div class="tr">
+             <ul>
+                 {% for exerpt in exerpts %}
+                 <li>
+                    <a href="{% url 'teach:expert_detail' exerpt.id %}" target="_blank"><img src="{{ exerpt.pic.url }}"></a>
+                    <p><a href="{% url 'teach:expert_detail' exerpt.id %}">{{ exerpt.name }}</a></p>
+                    <p>{{ exerpt.post }}</p>
+                </li>
+                 {% endfor %}
+             </ul>
+         </div>
+     </div>
+    </div>
+    <!--右侧侧区域结束--> 
+  </div>
+
+<div class="clear"></div>
+
+{% endblock %}

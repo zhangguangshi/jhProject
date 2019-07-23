@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    河南嘉禾智慧农业科技公司-专家详情页
+{% endblock %}
+
+
+{% block menu %}
+        <div class="nav well">
+            <div class="container">
+                <div class="row">
+                    <div class="logo col-md-4">
+                        <a href="{% url 'jh:index' %}"><img src="{% static '/htmlimg/logo.png' %}" alt=""></a>
+                    </div>
+                    <div class="col-md-8 pull-right">
+                        <ul class="menu">
+                            <li><a href="{% url 'jh:index' %}" >首页</a></li>
+                            <li><a href="{% url 'jh:finance' %}" >农业金融</a></li>
+                            <li><a href="{% url 'goods:goods' %}" >农资团购</a></li>
+                            <li><a href="{% url 'jh:news' 1 1 %}">农业资讯</a></li>
+                            <li><a href="{% url 'teach:teach' %}" class="seclted">农技服务</a></li>
+                            <li><a href="{% url 'cir:cir' %}">农产品流通</a></li>
+                            <li><a href="{% url 'jh:company' %}">关于我们</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+{% endblock %}
+{% block bann %}
+
+{% endblock %}
+{% block content %}
+
+<!--专家主页-->
+<div class="zhuan-all" style="height: auto">
+	<div class="zhuan-banner">
+		<div class="zhuan-banner-con">
+{#			<img class="kuang" src="" alt="专家标识">#}
+            <img class="tx" src="{{ expert.pic.url }}" alt="专家头像">
+			<p><span>{{ expert.name }}</span>
+                <span class="cw">{{ expert.post }}</span>
+            </p>
+		</div>
+
+
+
+	</div>
+
+	<div class="zhuan-con">
+        <div class="zhuan-title zhuan-t1" style=";top: 0;margin: 0 auto;" >
+			<h4><img src="/static/picture/icon-zhuan.png" alt="专家简介"><span>专家简介</span></h4>
+		</div>
+		<div class="zhuan-x">
+			<p>[职　　称]<span>{{ expert.post }}</span></p>
+			<p>[专业领域]<span>{{ expert.professional }}</span></p>
+			<p>[从业时间]<span>{{ expert.time }}</span></p>
+			<p>[个人简介]<span>{{ expert.desc }}</span></p>
+		</div>
+
+		<div class="zhuan-title">
+			<h4><img src="/static/picture/icon-fensi.png" alt="粉丝"><span>教学视频</span><a href="{% url 'teach:video_list' 'recom' %}" target="_blank">>>更多视频</a></h4>
+		</div>
+		<div class="zhuan-pic">
+			    <ul class="kc">
+              {% for video in expert.videomodel_set.all %}
+              <li>
+                  <div class="img2">
+                  <a target="_blank" href="{% url 'teach:video_detail' video.id %}">
+                    <div class="player"></div>
+                    <img width="207px" height="137px" src="{{ video.img.url }}" alt=""></a>
+                  </div>
+
+                  <h4><a target="_blank" href="{% url 'teach:video_detail' video.id %}">{{ video.title }}</a></h4>
+                </li>
+              {% endfor %}
+              </ul>
+
+		</div>
+		<script type="text/javascript">
+			$(function(){
+				var index=$("#topmenu li").length;
+				if(index>0 && index<=4){
+					$(".left-arrow").hide();
+					$(".right-arrow").hide();
+				}else if(index>4){
+					$(".zhuan-pic").hover(function(){
+						$(".left-arrow").toggle();
+						$(".right-arrow").toggle();
+					})
+					$(".zhuan-pic").slidelf({
+						"prev":"left-arrow",
+						"next":"right-arrow",
+						"speed":1000,
+					});
+				}
+			});
+		</script>
+		<div class="clear"></div>
+		<!--推荐产品-->
+			</div>
+    </div>
+<!--专家主页结束-->
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

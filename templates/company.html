@@ -1,0 +1,236 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    关于公司-河南嘉禾智慧科技农业
+{% endblock %}
+{% load static %}
+
+{% block menu %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/commen.css' %}">
+    <script type="text/javascript" src="{% static '/javascript/jquery.js' %}"></script>
+        <div class="nav well">
+            <div class="container">
+                <div class="row">
+                    <div class="logo col-md-4">
+                        <a href="{% url 'jh:index' %}"><img src="{% static '/htmlimg/logo.png' %}" alt=""></a>
+                    </div>
+                    <div class="col-md-8 pull-right">
+                        <ul class="menu">
+                            <li><a href="{% url 'jh:index' %}" >首页</a></li>
+                            <li><a href="{% url 'jh:finance' %}" >农业金融</a></li>
+                            <li><a href="{% url 'goods:goods' %}" >农资团购</a></li>
+                            <li><a href="{% url 'jh:news' 1 1 %}">农业资讯</a></li>
+                            <li><a href="{% url 'teach:teach' %}" >农技服务</a></li>
+                            <li><a href="{% url 'cir:cir' %}">农产品流通</a></li>
+                            <li><a href="{% url 'jh:company' %}" class="seclted">关于我们</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+{% endblock %}
+
+{% block bann %}
+
+<div id="banner" style="margin: auto">
+        <ul id="scrollList" >
+            <li style=""><img src="{% static '/htmlimg/about.jpg' %}" alt=""></li>
+            <li><img src="{% static '/htmlimg/about1.png' %}" alt=""></li>
+            <li><img src="{% static '/htmlimg/about2.jpg' %}" alt=""></li>
+            <li><img src="{% static '/htmlimg/about.jpg' %}" alt=""></li>
+        </ul>
+        <div id="btns">
+            <div>&lt</div>
+            <div>&gt</div>
+        </div>
+        <ul id="nums">
+            <li class="hover">1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+   <div class="ab_con">
+        <div class="container ppjs">
+            <h2><span>品牌介绍</span></h2>
+            <div class="row">
+                <div class="ab_left col-md-7">
+                    <p>河南嘉禾智慧农业科技公司现为国家科技型企业，河南省智慧农业物联网云应用工程研究中心、郑州市高校就业见习基地、新型职业农人培训专家单位、中英农业国际联合实验基地，农科院所技术合作单位、国家现代农业信息应用技术支持单位，公司专业从事智慧农业物联网技术开发、农业生产组织关系创新研究，农业大数据，智慧种植、养殖传感器研发、系统集成，北斗导航和高分卫星遥感技术在农业应用研究，为新型农业经营主体实施供应链惠农金融服务方案，精准播种、施肥、病虫害预警防控、智慧气象以及数据农场等技术研究和农业生产组织关系、农业供应链体系创新等相关技术研究和模式创新推广。
+                    </p>
+
+                    <p>顺应“互联网+”时代，嘉禾农业旨在“用科技推动农业产业升级”，为实现“让农民更富裕，让居民更健康”的愿景，不断进取，锐意创新，孵化出基于农村电子商务的“县域电商服务”、“真源码”、“惠农商学院”、“惠农优选”、“委托销售”等服务项目，通过农品上行、品牌孵化、标准化供应链打造、溯源、电商培训等落地方式，推进农业电商健康可持续发展，探索“互联网+现代农业”的新途径和新模式。
+                    </p>
+                    <p>运用线上加线下多维度技术保障体系，构建天地一体测控网络，使互联网、云计算、大数据技术加线下田间地头服务组成四位一体的互联网+新农业，帮助新型农业经营主体实现“投入更少、收获更多”。</p>
+                </div>
+                <div class="ab_right col-md-5"><img src="{% static '/htmlimg/reward1.jpg' %}" alt=""></div>
+            </div>
+        </div>
+        <div class="gsrywrap">
+            <div class="gsry container">
+                <h2><span>公司荣誉</span></h2>
+                <div class="item">
+                    <div class="content">
+                    <ul class=" txt">
+                        {% for honor in honors %}
+                        <li class="">
+                            <div>
+                                <img src="{{ honor.pic.url }}" alt="">
+                            </div>
+                            <p>{{ honor.title }}</p>
+                        </li>
+                        {% endfor %}
+
+                        <li class="">
+                            <div>
+                                <img src="{% static '/htmlimg/1557129542(1).jpg' %}" alt="">
+                            </div>
+                            <p>荣获科技型中小企业证书</p>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="{% static '/htmlimg/1557129564(1).jpg' %}" alt="">
+                            </div>
+                            <p>荣获省青年创新软件设计二等奖</p>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="{% static '/htmlimg/1557129627(1).jpg' %}" alt="">
+                            </div>
+                            <p>荣获“创赢未来”创新大赛三等奖</p>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="{% static '/htmlimg/1557129644(1).jpg' %}" alt="">
+                            </div>
+                            <p>荣获首届“互联网+”创新创业大赛铜奖</p>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="{% static '/htmlimg/1557129690(1).jpg' %}" alt="">
+                            </div>
+                            <p>荣获中国青年“创青春”大赛二等奖</p>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="{% static '/htmlimg/1557129711(1).jpg' %}" alt="">
+                            </div>
+                            <p>荣获“河南科技创业雏鹰大赛”企业组优秀奖</p>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="{% static '/htmlimg/1557129730(3).jpg' %}" alt="">
+                            </div>
+                            <p>被评为战略合作单位</p>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="{% static '/htmlimg/1557129753(1).jpg' %}" alt="">
+                            </div>
+                            <p>被评为巾帼农业示范基地</p>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="{% static '/htmlimg/1557129773(1).jpg' %}" alt="">
+                            </div>
+                            <p>被评为高校毕业生就业见习基地</p>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="{% static '/htmlimg/1557129797(1).jpg' %}" alt="">
+                            </div>
+                            <p>被评为平衡施肥产业技术创新战略联盟理事单位</p>
+                        </li>
+                    </ul>
+                </div>
+                    <a href="javascript:;" class="expand">展开全部<span class="glyphicon glyphicon-chevron-down"></span></a>
+                </div>
+            </div>
+        </div>
+        <div class="jhkj container">
+            <h2><span>嘉禾科技</span></h2>
+               <div class="row jhkj_con">
+                <div class="col-md-6"><img style="width: 100%;height: 120%"  src="{% static '/htmlimg/p18..jpg' %}" alt=""></div>
+                <div class="col-md-6"><img style="width: 100%;height: 120%"  src="{% static '/htmlimg/p19.jpg' %}" alt=""></div>
+               </div>
+                <div class="row">
+
+                <div class="col-md-6 wenzi">
+                    <p>水肥一体化技术是将灌溉与施肥融为一体的农业新技术。水肥一体化是借助压力系统(或地形自然落差)，将可溶性固体或液体肥料，按土壤养分含量和作物种类的需肥规律和特点，配兑成的肥液与灌溉水一起，通过可控管道系统供水、供肥，使水肥相融后，通过管道、喷枪或喷头形成喷灌、均匀、定时、定量，喷洒在作物发育生长区域，使主要发育生长区域土壤始终保持疏松和适宜的含水量，同时根据不同的作物的需肥特点，土壤环境和养分含量状况，需肥规律情况进行不同生育期的需求设计，把水分、养分定时定量，按比例直接提供给作物。</p>
+                </div>
+                <div class="col-md-6 wenzi">
+                    <p>大棚监控及智能控制解决方案是通过可在大棚内灵活部署的各类无线传感器和网络传输设备，对农作物温室内的温度，湿度、光照、土壤温度、土壤含水量、CO2浓度等与农作物生长密切相关环境参数进行实时采集，在数据服务器上对实时监测数据进行存储和智能分析与决策，并自动开启或者关闭指定设备（如远程控制浇灌、开关卷帘等）。
+
+                        温室智能控制系统是利用环境数据与作物信息，指导用户进行正确的栽培管理。物联网温室环境监测系统可广泛应用于农业、园艺、畜牧业等领域，在需要特殊环境要求的场所实施监控和管理，为实现对生态作物的健康成长和及时调整栽培、管理等措施提供及时的科学的依据，同时实现监管自动化。</p>
+                </div>
+                </div>
+        </div>
+        <div class="wrapXxpx" style="background: #eee">
+        <div class="xxpx container" >
+        <h2><span>下乡培训</span></h2>
+            <div class="row" style="margin: 30px 0">
+                    <div class="col-md-3"><img style="width: 100%;height: 100%" src="{% static '/htmlimg/xx1.png' %}" alt=""></div>
+                    <div class="col-md-3">
+                        <p style="text-indent: 28px">嘉禾农业信息采集和无线传输技术上传云端服务器，可以远程自动控制，给土地以思想，乡村振兴， 生活富裕是根本。实施乡村振兴战略，不断拓宽农民增收渠道，全面改善农村生产生活条件，促进社会公平正义，有利于增进农民福祉，让亿万农民走上共同富裕的道路，汇聚起建设社会主义现代化强国的磅礴力量</p>
+                    </div>
+                    <div class="col-md-3"><img style="width: 100%;height: 100%" src="{% static '/htmlimg/xx2.png' %}" alt=""></div>
+                    <div class="col-md-3"><p style="text-indent: 28px">城市近郊区以及县城城关镇所在地的村庄，具备成为城市后花园的优势，也具有向城市转型的条件。综合考虑工业化、城镇化和村庄自身发展需要，加快城乡产业融合发展、基础设施 互联互通公共服务共建共享，在形态上保留乡村风貌，在治理上体现城市水平，满足城市消费需求能力，为城乡融合发展提供实践经验。 </p></div>
+            </div>
+       </div>
+    </div>
+
+    {% for type in types %}
+             <div class="wrapXxpx" style="background: #eee">
+        <div class="xxpx container" >
+        <h2><span>{{ type.type_name }}</span></h2>
+            <div class="row" style="margin: 30px 0">
+                    {% for action in type.action_set.all %}
+                    <div class="col-md-3">
+                        <img style="width: 100%;height: 100%" src="{{ action.img.url }}" alt="">
+                    </div>
+                    <div class="col-md-3">
+                        <p style="text-indent: 28px">{{ action.desc }}</p>
+                    </div>
+                    {% endfor %}
+            </div>
+       </div>
+    </div>
+
+    {% endfor %}
+
+
+
+
+    </div>
+
+<script src="{% static '/javascript/startMove.js' %}"></script>
+<script src="{% static '/javascript/lunbo.js' %}"></script>
+<script>
+    $(function () {
+        $(".item").each(function () {
+            var obj = $(this);
+            if (obj.find(".content").eq(0).height() < obj.find(".txt").eq(0).height()) {
+                obj.find(".expand").eq(0).click(function () {
+                    if ($(this).text() == "展开全部") {
+                        $(this).parent().find(".content").eq(0).addClass("auto");
+                        $(this).html("收起<span class='glyphicon glyphicon-chevron-up'></span>");
+                    } else {
+                        $(this).parent().find(".content").eq(0).removeClass("auto");
+                        $(this).html("展开全部<span class='glyphicon glyphicon-chevron-down'></span>");
+                    }
+                });
+            } else {
+                $(this).find(".expand").eq(0).text("没有更多");
+            }
+        });
+    });
+    $("ul.menu li").eq(0).find('a').removeClass('seclted');
+    $("ul.menu li").eq(6).find('a').addClass('seclted')
+</script>
+
+{% endblock %}
+

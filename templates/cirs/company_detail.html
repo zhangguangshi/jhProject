@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    关于公司-农产品采购公司
+{% endblock %}
+{% load static %}
+{% block head %}
+
+{% endblock %}
+
+
+{% block menu %}
+        <div class="nav well">
+            <div class="container">
+                <div class="row">
+                    <div class="logo col-md-4">
+                        <a href="{% url 'jh:index' %} "><img src="{% static '/htmlimg/logo.png' %}" alt=""></a>
+                    </div>
+                    <div class="col-md-8 pull-right">
+                        <ul class="menu">
+                            <li><a href="{% url 'jh:index' %}" >首页</a></li>
+                            <li><a href="{% url 'jh:finance' %}" >农业金融</a></li>
+                            <li><a href="{% url 'goods:goods' %}" >农资团购</a></li>
+                            <li><a href="{% url 'jh:news' 1 1 %}">农业资讯</a></li>
+                            <li><a href="{% url 'teach:teach' %}">农技服务</a></li>
+                            <li><a href="{% url 'cir:cir' %}"  class="seclted">农产品流通</a></li>
+                            <li><a href="{% url 'jh:company' %}">关于我们</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+{% endblock %}
+{% block bann %}
+
+{% endblock %}
+
+
+{% block content %}
+
+    <h1 class="about" style="text-align: center;">采购公司及相关的信息</h1>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}"/>
+<script type="text/javascript" src="{% static 'javascript/limit.js' %}"></script>
+<div class="container">
+    <div class="cai-list">
+        <div class="cai-ll">
+            <h3>
+                <img src="{% static 'htmlimg/details.png' %}" alt="">
+            </h3>
+
+            <ul class="ui-tabs-nav">
+                   {% for com in companys %}
+                    <li {% if com.id == pur_id   %}
+                        class="sec"
+                        {% else %}
+                    {% endif %}>
+                        <a href="{% url 'cir:cir_detail' com.id %}">{{ com.name }}</a>
+                    </li>
+                    {% empty %}
+                       <h1>暂无数据！</h1>
+                    {% endfor %}
+            </ul>
+        </div>
+      <div class="cai-rc">
+
+            <ul class="news-con">
+                <li style="height: 60px"><h1 style="text-align: center">{{ content.name }}</h1>
+                <li>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ content.desc }}</p>
+                </li>
+            </ul>
+
+            <div class="fenye">
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+{% endblock %}
+

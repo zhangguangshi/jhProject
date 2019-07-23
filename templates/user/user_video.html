@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    河南嘉禾智慧科技农业-智能监控服务
+{% endblock %}
+
+{% block menu %}
+
+{% endblock %}
+
+{% block bann %}
+
+{% endblock %}
+
+{% block content %}
+  <!--container区域-->
+  <div class="course-bt">
+        <p>当前位置：<a href="{% url 'user:center' %}">{{ user.username }}-个人中心</a>
+            &nbsp;>&nbsp;
+            <a href="">{{ monit.number }}号监控页</a>
+            &nbsp;>&nbsp;
+            {{ monit.title }}
+        </p>
+        <h3>{{ monit.number }}号区--{{ monit.title }}监控</h3>
+    </div>
+  <div class="course-player" style="height: 1200px">
+    <!--播放区域开始-->
+    <div class="play-cont">
+      <!--播放区域左侧开始-->
+      <div class="play-left">
+        <video id="video1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none" width="915" height="560"
+      poster="{{ monit.img.url }}"
+      data-setup="{}" autoplay=''>
+            <source src="http://source.nongguanjia.com/Z6C0191.mp4" type='video/mp4' />
+          <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
+          <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />
+
+          <p class="vjs-no-js">
+            To view this video please enable JavaScript, and consider upgrading to a web browser that
+            <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+          </p>
+        </video>
+        <div class="play-bottom">
+
+          <span class="sp-b"></span>
+          <span class="sp-br">
+{#             <a href="" style="color: bisque">收藏</a>#}
+          </span>
+        </div>
+      </div>
+      <!--播放区域左侧结束-->
+      <!--播放右侧推荐开始-->
+
+      <!--播放右侧推荐结束-->
+      <div class="clear"></div>
+    </div>
+    <!--播放区域结束-->
+    <!--播放底部开始-->
+    <div class="play-cont-text">
+      <!--左侧详细信息开始-->
+      <div class="text-l" id="text-l">
+        <ul>
+          <li>
+            <a class="sec-p" onclick="bf(this, 'sec-p')" href="#kc">监控描述</a>
+          </li>
+          <li>
+            <a onclick="bf(this, 'sec-p')" href="#zj">主人信息</a>
+          </li>
+          <li>
+            <a onclick="bf(this, 'sec-p')" href="#cg">过程记录</a>
+          </li>
+        </ul>
+        <div class="text-con" id="kc">
+          <h4>监控描述</h4>
+          <hr style="height:1px;border:none;border-top:1px solid #eee; margin-top:10px;">
+          <div class="p-t p-text">{{ monit.desc }}</div>
+        </div>
+        <div class="text-con" id="zj">
+          <h4>主人信息</h4>
+          <hr style="height:1px;border:none;border-top:1px solid #eee; margin-top:10px">
+          <div class="card">
+              <div class="card-t">
+                <img src="{% static 'htmlimg/zhangGS.jpg' %}" alt="头像">
+                <p>
+                    <span class="pt">（农业用户)</span>
+                </p>
+                <p>
+                  <span>种植农作物：大豆小麦</span>
+             </p>
+                  <p class="t4"><span>监控时长：24小时</span><p>
+              </div>
+              <div class="card-b"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="text-con" id="cg">
+          <h4>过程记录</h4>
+          <hr style="height:1px;border:none;border-top:1px solid #eee; margin-top:10px;">
+          <div class="p-t p-img">暂无记录</div>
+            </div>
+                <div class="clear"></div>
+              </div>
+              <!--左侧详细信息结束-->
+              <!--右侧推荐开始-->
+              <div class="text-r" id="text-r">
+                <h3>其他监控</h3>
+                <ul>
+                    {% for other in others %}
+                        {% if monit.number == other.number %}
+{#                        这里将本页的视频淘汰掉#}
+                        {% else %}
+                            <li>
+                            <a href="{% url 'user:monit' other.number %}">
+                            <img src="{{ other.img.url }}" alt="">
+                            </a>
+                          <p>
+                            <a href="{% url 'user:monit' other.number %}">
+                              <span>{{ other.number }}号监控-{{ other.title }}</span>
+                            </a>
+                            <span class="p1">{{ other.desc|truncatechars:8 }}</span>
+                          </p>
+                        </li>
+                        {% endif %}
+
+                    {% endfor %}
+                </ul>
+                <div class="clear"></div>
+              </div>
+              <!--右侧推荐结束--> </div>
+            <!--播放底部开始-->
+            <div class="clear"></div>
+          </div>
+          <!--container区域结束-->
+{% endblock %}

@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    河南嘉禾智慧科技农业-农业新闻
+{% endblock %}
+{#<script>#}
+{#    $(".news").click(function () {#}
+{#        $(this).attr("class","seclted")#}
+{#    });#}
+{#</script>#}
+{% block menu %}
+
+<div class="nav well">
+            <div class="container">
+                <div class="row">
+                    <div class="logo col-md-4">
+                        <a href="./index.html"><img src="{% static '/htmlimg/logo.png' %}" alt=""></a>
+                    </div>
+                    <div class="col-md-8 pull-right">
+                        <ul class="menu">
+                            <li><a href="{% url 'jh:index' %}" >首页</a></li>
+                            <li><a href="{% url 'jh:finance' %}">农业金融</a></li>
+                            <li><a href="{% url 'goods:goods' %}" >农资团购</a></li>
+                            <li><a href="{% url 'jh:news' 1 1 %}" class="seclted">农业资讯</a></li>
+                            <li><a href="{% url 'teach:teach' %}">农技服务</a></li>
+                            <li><a href="{% url 'cir:cir' %}">农产品流通</a></li>
+                            <li><a href="{% url 'jh:company' %}">关于我们</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+{% endblock %}
+
+{% block bann %}
+
+{% endblock %}
+
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/commen.css' %}">
+    <link rel="stylesheet" href="{% static 'css/information.css' %}">
+    <script type="text/javascript" src="{% static '/javascript/jquery.js' %}"></script>
+    <script src="{% static '/javascript/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+<body data-spy="scroll" dta-target="#myAffix">
+    <div class="new_banner">
+        <div class='accrodion-group row'>
+            <div class='accordion-1'>
+            </div>
+            <div class='accordion-2'>
+            </div>
+            <div class='accordion-3'>
+            </div>
+            <div class='accordion-4'>
+            </div>
+            <div class='accordion-5'>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row info">
+            <div class="con_left col-xs-3" id="myAffix">
+                <h4><span>新闻资讯</span></h4>
+
+                <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="486">
+                    {% for type in types %}
+                       <li {% if type.id == web_id %}
+                       class="active"
+                       {% else %}
+                       {% endif %}>
+                           <a href="#part{{ type.id }}">{{ type.type_name }}</a>
+                       </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+            <div class="con_right col-xs-9">
+                {% for tp in types %}
+                 <h5 id="part{{ tp.id }}">{{ tp.type_name }}</h5>
+                <ul class="">
+                    {% for new in tp.news_set.all %}
+                    <li><a href="{{ new.href }}">{{ new.title|truncatechars:40 }}</a><span>【{{ new.origin }}】{{ new.time }}</span></li>
+                    {% endfor %}
+                </ul>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+    <dl id="returnTop">
+        <dt><span class="glyphicon glyphicon-chevron-up"></span></dt>
+        <dd>顶部</dd>
+    </dl>
+
+</body>
+{#<script src="{% static 'javascript/accordion.js' %}" type="text/javascript" charset="utf-8"></script>#}
+{#<script src="{% static 'javascript/data.js' %}"></script>#}
+<script>
+    $(function () {
+
+    $("ul.menu li").eq(0).find('a').removeClass('seclted');
+    $("ul.menu li").eq(3).find('a').addClass('seclted');
+        //当滚动条的位置处于距顶部100像素以下时，跳转链接出现，否则消失
+            $(window).scroll(function(){
+                if ($(window).scrollTop()>100){
+                    $("#returnTop").fadeIn(1500);
+                }
+                else
+                {
+                    $("#returnTop").fadeOut(1500);
+                }
+            });
+            //当点击跳转链接后，回到页面顶部位置
+            $("#returnTop").click(function(){
+                $('body,html').animate({scrollTop:0},1000);
+                return false;
+            });
+        });
+</script>
+
+{#<link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}"/>#}
+{#<script type="text/javascript" src="{% static 'javascript/limit.js' %}"></script>#}
+{#<div class="container">#}
+{#    <div class="cai-list">#}
+{#        <div class="cai-ll">#}
+{#            <h3>#}
+{#                <img src="{% static 'htmlimg/all-news.png' %}" alt="">#}
+{#            </h3>#}
+{#            <ul class="ui-tabs-nav">#}
+{#                {% for type in types %}#}
+{#                    <li {% if type.id == web_id %}#}
+{#                        class="sec"#}
+{#                        {% else %}#}
+{#                    {% endif %}>#}
+{#                        <a href="{% url 'jh:news' type.id 1%}">{{ type.type_name }}</a>#}
+{#                    </li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#        </div>#}
+{#      <div class="cai-rc">#}
+{#            <ul class="news-con">#}
+{#                {% for new in page %}#}
+{#                <li>#}
+{#                    <h3>#}
+{#                        <a href="{{ new.href }}" class="news" limit="40">【{{ new.origin }}】{{ new.title|truncatechars:38 }}</a>#}
+{#                    </h3>#}
+{#                    <div class="news-c">#}
+{#                        <a href="{{ new.href }}"><img src="{{ new.picture.url }}" alt=""></a>#}
+{#                        <p><a href="" style="text-decoration:none;">{{ new.descrip }}</a>#}
+{#                        <a href="{{ new.href }}">[详情]</a>#}
+{#                    </p>#}
+{#                        <p class="news-tm">{{ new.time }}</p>#}
+{#                    </div>#}
+{#                </li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#            <div class="fenye">#}
+{##}
+{#            <div>#}
+{#                <a href="{% url 'jh:news' web_id 1 %}" class="first">首页</a>#}
+{#                {% if page.has_previous %}#}
+{#                    <a class="prev" href="{% url 'jh:news' web_id page.previous_page_number  %}">上一页</a>#}
+{#                {% else %}#}
+{#                    <a class="prev" href="#">上一页</a>#}
+{#                {% endif %}#}
+{##}
+{#                    {% if page_num|add:"-3" > 0 %}#}
+{#                        <a href="{% url 'jh:news' web_id page_num|add:"-3" %}" class="">{{ page_num|add:"-3" }}</a>#}
+{#                        <a href="{% url 'jh:news' web_id page_num|add:"-2" %}" class="">{{ page_num|add:"-2" }}</a>#}
+{#                        <a href="{% url 'jh:news' web_id page_num|add:"-1" %}" class="">{{ page_num|add:"-1" }}</a>#}
+{#                        {% elif page_num|add:"-2" > 0  %}#}
+{#                        <a href="{% url 'jh:news' web_id page_num|add:"-2" %}" class="">{{ page_num|add:"-2" }}</a>#}
+{#                        <a href="{% url 'jh:news' web_id page_num|add:"-1" %}" class="">{{ page_num|add:"-1" }}</a>#}
+{#                        {% elif page_num|add:"-1" > 0 %}#}
+{#                         <a href="{% url 'jh:news' web_id page_num|add:"-1" %}" class="">{{ page_num|add:"-1" }}</a>#}
+{#                    {% endif %}#}
+{##}
+{#                    {% if page_num  %}#}
+{#                        <a href="{% url 'jh:news' web_id page_num %}" class="seclted">{{ page_num }}</a>#}
+{#                    {% endif %}#}
+{##}
+{#                    {% if page_num <= page_max|add:"-3" %}#}
+{#                        <a href="{% url 'jh:news' web_id page_num|add:"1" %}" class="">{{ page_num|add:"1" }}</a>#}
+{#                        <a href="{% url 'jh:news' web_id page_num|add:"2" %}" class="">{{ page_num|add:"2" }}</a>#}
+{#                        <a href="{% url 'jh:news' web_id page_num|add:"3" %}" class="">{{ page_num|add:"3" }}</a>#}
+{#                    {% elif page_num <= page_max|add:"-2" %}#}
+{#                        <a href="{% url 'jh:news' web_id page_num|add:"1" %}" class="">{{ page_num|add:"1" }}</a>#}
+{#                        <a href="{% url 'jh:news' web_id page_num|add:"2" %}" class="">{{ page_num|add:"2" }}</a>#}
+{#                    {% elif page_num <= page_max|add:"-1" %}#}
+{#                        <a href="{% url 'jh:news' web_id page_num|add:"1" %}" class="">{{ page_num|add:"1" }}</a>#}
+{#                    {% endif %}#}
+{##}
+{#                {% if page.has_next %}#}
+{#                    <a class="next" href="{% url 'jh:news' web_id page.next_page_number %}">下一页</a>#}
+{#                {% else %}#}
+{#                    <a class="next" href="#">下一页</a>#}
+{#                {% endif %}#}
+{#                <a class="end" href="{% url 'jh:news' web_id page_max %}">末页</a>#}
+{#            </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="clear"></div>#}
+{#</div>#}
+{#<script type="text/javascript">#}
+{#    $(function(){#}
+{#        $(".news").limit();#}
+{#    })#}
+{#</script>#}
+
+{% endblock %}

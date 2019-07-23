@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    河南嘉禾智慧科技农业-技术服务
+{% endblock %}
+
+{% block head %}
+    <meta name="keywords" content="农技服务、农技课程" />
+    <meta name="description" content="农管家为新型农业经营主体提供作物、农业服务、农业资讯等相关产业权威视频课程。" />
+{% endblock %}
+
+{% block menu %}
+        <div class="nav well">
+            <div class="container">
+                <div class="row">
+                    <div class="logo col-md-4">
+                        <a href="{% url 'jh:index' %}"><img src="{% static '/htmlimg/logo.png' %}" alt=""></a>
+                    </div>
+                    <div class="col-md-8 pull-right">
+                        <ul class="menu">
+                            <li><a href="{% url 'jh:index' %}" >首页</a></li>
+                            <li><a href="{% url 'jh:finance' %}" >农业金融</a></li>
+                            <li><a href="{% url 'goods:goods' %}" >农资团购</a></li>
+                            <li><a href="{% url 'jh:news' 1 1 %}">农业资讯</a></li>
+                            <li><a href="{% url 'teach:teach' %}" class="seclted">农技服务</a></li>
+                            <li><a href="{% url 'cir:cir' %}">农产品流通</a></li>
+                            <li><a href="{% url 'jh:company' %}">关于我们</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+{% endblock %}
+{% block bann %}
+
+{% endblock %}
+{% block content %}
+ <div class="container">
+        <div class="course-list">
+            <div class="list-l">
+                <h3><img src="/static/picture/all.png" alt="全部课程"></h3>
+                <ul>
+                    <li>
+{#                        此处是视频列表页的特别推荐块，注意这里用 “recom” 参数路径，按照点击量排序#}
+                        <span {% if type_name == "recom" %}
+                            class="sec"
+                            {% else %}
+                            {% endif %}
+                            id="recom">
+                            <a href="{% url 'teach:video_list' 'recom' %}" >特别推荐</a>
+                        </span>
+                    </li>
+
+                    <li>
+{#                      此处是最新课程，注意使用 “tests” 参数路径，按照更新时间排序#}
+                        <span {% if type_name == "tests" %}
+                            class="sec"
+                        {% endif %} id="tests" onclick="load()" style="cursor:pointer" >
+                            <a href="{% url 'teach:video_list' 'tests' %}" >最新课程</a>
+                        </span>
+                    </li>
+{#                    此处遍历视频的大类型，然后查找里面的小分类#}
+                    {% for cate in category %}
+                     <li>
+                        <span class="sp6" style="color: #12b439">{{ cate.category }}</span>
+                        <p>
+                            {% for type in cate.videotype_set.all %}
+                                <a {% if type_id == type.id %}
+                                class="sect"
+                                {% endif %}
+                                href="{% url 'teach:video_list' type.id %}" style="color: #c051a3">{{ type }}</a>
+                            {% endfor %}
+                        </p>
+                    </li>
+                    {% empty %}
+                        暂无数据！
+                    {% endfor %}
+
+                </ul>
+            </div>
+
+            <div class="list-r">
+
+                <ul>
+{#                这里查找出推荐的视频，然后依点击量排列#}
+                {% if type_name == 'recom' %}
+                {% for pop in pop_video %}
+                     <li>
+                        <div class="img2">
+                        <a href="{% url 'teach:video_detail' pop.id %}" target="_blank">
+                            <div class="player"></div>
+                            <img width="207px" height="137px" src="{{ pop.img.url }}" alt="{{ pop.title }}">
+                        </a>
+                        </div>
+                        <p class="con-text">
+                            <span class="span-l">{{ pop.expert.first.name }}({{ pop.expert.first.post }})</span>
+                            <span class="span-r">{{ pop.times }}</span>
+                        </p>
+                        <h4>
+                            <a href="{% url 'teach:video_detail' pop.id %}" target="_blank">{{ pop.title }}</a>
+                        </h4>
+                    </li>
+                    {% empty %}
+                    暂无数据！
+                {% endfor %}
+
+                {% elif type_name == 'tests' %}
+                {% for new in new_video %}
+                    <li>
+                        <div class="img2">
+                        <a href="{% url 'teach:video_detail' new.id %}" target="_blank">
+                            <div class="player"></div>
+                            <img width="207px" height="137px" src="{{ new.img.url }}" alt="{{ new.title }}">
+                        </a>
+                        </div>
+                        <p class="con-text">
+                            <span class="span-l">{{ new.expert.first.name }}({{ new.expert.first.post }})</span>
+                            <span class="span-r">{{ new.times }}</span>
+                        </p>
+                        <h4>
+                            <a href="{% url 'teach:video_detail' new.id %}" target="_blank">{{ new.title }}</a>
+                        </h4>
+                    </li>
+                    {% empty %}
+                    暂无数据！
+                {% endfor %}
+                {% else %}
+                    {% for video in videos %}
+                    <li>
+                        <div class="img2">
+                        <a href="{% url 'teach:video_detail' video.id %}" target="_blank">
+                            <div class="player"></div>
+                            <img width="207px" height="137px" src="{{ video.img.url }}" alt="{{ video.title }}">
+                        </a>
+                        </div>
+                        <p class="con-text">
+                            <span class="span-l">{{ video.expert.first.name }}({{ video.expert.first.post }})</span>
+                            <span class="span-r">{{ video.times }}</span>
+                        </p>
+                        <h4>
+                            <a href="{% url 'teach:video_detail' video.id %}" target="_blank">{{ video.title }}</a>
+                        </h4>
+                    </li>
+                    {% endfor %}
+
+                {% endif %}
+
+                 </ul>
+                <div class="clear"></div>
+                <div class="fenye">
+                <div>
+                </div>                <!-- <a href="#">上一页</a><a href="#" class="seclted">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><span>···</span><a href="#">18</a><a href="">下一页</a> -->
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="clear"></div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

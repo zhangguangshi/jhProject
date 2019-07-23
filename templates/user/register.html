@@ -1,0 +1,217 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>注册</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/commen.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script type="text/javascript" src="{% static 'javascript/jquery.js' %}"></script>
+</head>
+
+<body>
+    <!-- top -->
+    <div class="top hidden-xs">
+        <div class="container">
+            <div class="row">
+                <div class="top_l">
+                    <span>欢迎光临嘉禾智慧农业！</span>
+                    <a href="{% url 'user:login' %}">请登录</a>
+                    <a>/</a>
+                    <a href="{% url 'user:register' %}">注册</a>
+                </div>
+                <div class="top_r">
+                    <ul class="hidden-xs">
+                        <li><a href="">关注嘉禾</a></li>
+                        <li><a href="">帮助中心</a></li>
+                        <li><a href="">关于嘉禾</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="nav well">
+        <div class="container">
+            <div class="row">
+                <div class="logo col-md-2">
+                    <a href="{% url 'jh:index' %}"><img src="{% static 'htmlimg/logo.png' %}" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="login_form_bg">
+        <div class="login_form_wrap clearfix">
+            <div class="login_banner fl"></div>
+            <div class="login_form fr">
+                <div class="login_title clearfix">
+                    <h1>用户注册</h1>
+                    <a href="{% url 'user:login' %}">用户登录</a>
+                </div>
+                <div class="form_input">
+                    <form action="{% url 'user:register' %}" id="form" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="username" class="name_input" id="username" placeholder="设置2-6位汉字用户名"><span
+                            id="usernameInfo"></span>
+                        <input type="tel" name="tel" class="tel_input" id="phone" placeholder="请输入手机号"><span
+                            id="telInfo"></span>
+                        <div class="authcode_input">
+                            <input type="text" name="code" id="auth-code" placeholder="请输入验证码">
+                            <input type="button" id="getCode" class="getCodeBtn" value="获取验证码">
+                        </div><span id="auth-codeInfo"></span>
+                        <input type="password" name="password" class="password_input" id="password"
+                            placeholder="设置6-8位数字和字母组合密码"><span id="passwordInfo"></span>
+                        <input type="password" id="password_con" name="repassword" class="password_input"
+                            placeholder="确认密码"><span id="password_conInfo"></span>
+                        <!-- <div id="warn"></div> -->
+                        <input type="submit" id="submit" name="" value="注册" class="input_submit"><span></span>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'javascript/commen-foot.js' %}"></script>
+</body>
+<script>
+
+    $("#username").blur(function () {
+        //对用户名进行验证
+        checkUsername("#username", "#usernameInfo");
+    }).focus(function () {
+        clearInfo("#usernameInfo");
+    });
+    //验证
+    function checkUsername(id, info) {
+        var reg = /^[\u4E00-\u9FA5]{2,6}$/;
+        var $username = $(id).val();
+        if (!reg.test($username)) {
+            setInfo(info, "用户名2-6个汉字");
+            return false;
+        }
+        return true;
+    }
+    //手机号
+    $("#phone").blur(function () {
+        //对手机号进行验证
+        checkTel("#phone", "#telInfo");
+    }).focus(function () {
+        clearInfo("#telInfo");
+    });
+    //验证
+    function checkTel(id, info) {
+        var reg = /^[1][0-9]{10}$/;
+        var $tel = $(id).val();
+        if (!reg.test($tel)) {
+            setInfo(info, "手机号格式不正确");
+            return false;
+        }
+        return true;
+    }
+
+    $('#getCode').click(function(){
+        //发送验证码
+        $.get('send_message', {mobile:$('#phone').val()}, function(msg) {
+            if(msg=='提交成功'){
+                let count = 60;
+        const countDown = setInterval(() => {
+            if (count === 0) {
+                $('#getCode').val('重新发送').removeAttr('disabled');
+                $('#getCode').css({
+                    background: '#ff9400',
+                    color: '#fff',
+                });
+                clearInterval(countDown);
+            } else {
+                $('#getCode').attr('disabled', true);
+                $('#getCode').css({
+                    background: '#d8d8d8',
+                    color: '#707070',
+                });
+                $('#getCode').val(count + '秒后可重新获取');
+            }
+            count--;
+        }, 1000);
+            }else{
+                $('#telInfo').html('手机号已经被注册')
+            }
+        });
+    });
+
+    //验证
+    if(0=={{is_code}}){
+        $('#auth-codeInfo').html('验证码不正确')
+    }else{
+        $('#auth-codeInfo').html('')
+    }
+
+    //密码
+    $("#password").blur(function () {
+        //对密码进行验证
+        checkPassword("#passord", "#passwordInfo");
+    }).focus(function () {
+        clearInfo("#passwordInfo");
+    });
+    //验证
+    function checkPassword(id, info) {
+        var reg = /^[a-zA-Z0-9]{6,18}$/;
+        var $password = $(id).val();
+        if (!reg.test($password)) {
+            setInfo(info, "密码必须为6到18位数字或字母");
+            return false;
+        }
+        return true;
+    }
+    //重复密码
+    $("#password_con").blur(function () {
+        //对重复密码进行验证
+        checkPasswordAgain("#password", "#password_con", "#password_conInfo");
+    }).focus(function () {
+        clearInfo("#password_conInfo");
+    });
+    //验证
+    function checkPasswordAgain(pwd1, pwd2, info) {
+        var $pwd1 = $(pwd1).val();
+        var $pwd2 = $(pwd2).val();
+        if ($pwd1 != $pwd2) {
+            setInfo(info, "重复密码与原密码不一致");
+            return false;
+        }
+        var reg = /^[a-zA-Z0-9]{6,18}$/
+        if (!reg.test($pwd2)) {
+            setInfo(info, "密码必须为6到18位数字或字母");
+            return false;
+        }
+        return true;
+    }
+
+    //设置错误信息
+    function setInfo(id, info) {
+        $(id).text(info);
+    }
+    //清空错误信息
+    function clearInfo(id) {
+        $(id).text("");
+    }
+
+    function checkAll() {
+        if (checkUsername('#username', '#usernameInfo') & checkTel('#phone',
+                '#telInfo') &  checkPassword('#password', '#passwordInfo') & checkPasswordAgain('#password', '#password_con', '#password_conInfo') ) {
+            alert("注册成功！");
+            return true;
+        }
+        return false;
+    }
+    //校验所有表单元素的内容
+    $("#form").submit(function () {
+        return checkAll();
+    })
+
+</script>
+
+
+</html>

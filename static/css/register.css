@@ -1,0 +1,9 @@
+#content{position: relative;}
+#content .info{position: absolute;top:100px;right: 100px;border: 1px solid #ccc;background: #fff;width: 360px;height: 400px;padding: 30px}
+#content .info h3{text-align: center;line-height: 40px;color: olivedrab}
+#content .info p{border-bottom: 1px solid #eee;height: 56px;line-height: 36px;padding: 10px 0 0;line-height: 60px;width: 100%}
+#content .info p span{padding: 0 8px}
+#content .info input{border: none;line-height: 30px;width: 50%;height: 30px}
+#content .info button{width: 100%}
+.info form>span{height: 50px;line-height: 50px;display: inline-block;width: 300px;padding: 0 8px}
+#content .info #warn{color: red}

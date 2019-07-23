@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block menu %}
+ <div class="nav well">
+            <div class="container">
+                <div class="row">
+                    <div class="logo col-md-4">
+                        <a href="{% url 'jh:index' %}"><img src="{% static '/htmlimg/logo.png' %}" alt=""></a>
+                    </div>
+                    <div class="col-md-8 pull-right">
+                        <ul class="menu">
+                            <li><a href="{% url 'jh:index' %}" >首页</a></li>
+                            <li><a href="{% url 'jh:finance' %}" class="seclted">农业金融</a></li>
+                            <li><a href="{% url 'goods:goods' %}">农资团购</a></li>
+                            <li><a href="{% url 'jh:news' 1 1 %}">农业资讯</a></li>
+                            <li><a href="{% url 'teach:teach' %}">农技服务</a></li>
+                            <li><a href="{% url 'cir:cir' %}">农产品流通</a></li>
+                            <li><a href="{% url 'jh:company' %}">关于我们</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+{% endblock %}
+{% block bann %}
+
+{% endblock %}
+{% block content %}
+
+<style>
+	.process{margin: 10px auto;display: flex;align-items: center;justify-content: center;width: 100%}
+	form {width: 500px;margin: 50px auto;border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;padding: 25px;}
+	form fieldset {border: none;border-top: 1px solid #c9dca6;margin-left: 22px;}
+	legend{font-size: 28px;line-height: 60px;}
+	form div{margin-top: 10px;}
+	form p{line-height: 54px;text-align: right;}
+	.last{margin-bottom: 40px;}
+	input {border: 1px solid #ccc;width: 260px;height: 36px;background: #f8f8f8}
+	label{width: 120px;text-align: left;font-size: 16px}
+	.male,.female{display: inline-block;}
+	.male label,.female label{width: 20px}
+	#male,#female{width: 15px;height: 15px;margin-left: 20px;}
+	#submit{width: 30%;margin-top: 20px;float: right;margin-right: 42px;background: #78b335;color: #fff;}
+	#submit:hover{background: #b3e07e;color: #333}
+	form div span{color: red;display: block;margin-left: 120px;margin-top: 10px}
+</style>
+
+
+	<div class="process"><img src="{% static '/htmlimg/process.png' %}" alt=""></div>
+	<div class="container">
+        {% if  request.session.user_name %}
+
+
+		<form id="form" method="post">
+            {% csrf_token %}
+			<p>*号所在项为必填项</p>
+			<fieldset>
+				<legend>贷款申请表</legend>
+				<div>
+					<label for="name">姓名*</label>
+					<input id="name" name="name" type="text" />
+					<span id="nameInfo"></span>
+				</div>
+				<div><label for="sex">性别*</label>
+					<div class="female">
+						<input type="radio" id="female" name="sex" value="0"/>
+						<label for="female">女</label>
+					</div>
+					<div class="male">                
+						<input type="radio" id="male" name="sex" value="1"/>
+						<label for="male">男</label>
+					</div>
+					<span id="sexInfo"></span>
+				</div>
+				<div>
+					<label for="idNumber">身份证号*</label>
+					<input id="idNumber" name="idNumber" type="text" />
+					<span id="idInfo"></span>
+				</div>
+				<div>
+					<label for="tel">手机号码*</label>
+					<input id="tel" name="tel" type="tel" />
+					<span id="telInfo"></span>
+				</div>
+				<div>
+					<label for="adress">地址(具体到乡)*</label>
+					<input id="adress" name="adress" type="text" />
+					<span id="adressInfo"></span>
+				</div>
+				<div>
+					<label for="area">种植作物亩数*</label>
+					<input id="area" name="area" type="number" />
+					<span id="areaInfo"></span>
+				</div>
+				<div>
+					<label for="monney">资金需求金额*</label>
+					<input id="monney" name="monney" type="number" />
+					<span id="monneyInfo"></span>
+				</div>
+				<div>
+					<input type="submit" id="submit" value="提交"/>
+				</div>
+			</fieldset>
+		</form>
+        {% else %}
+           <p style="margin: 0 auto;width: 200px;margin: 30px auto;text-align: center;line-height: 60px;font-size: 20px;background: #78b335;border-radius: 10px;">请您先<a style="color: blue" href="{% url 'user:login' %}">登录</a>后填写表单</p>
+
+    {% endif %}
+	</div>
+
+<script>
+	$("#name").blur(function () {
+        //对用户名进行验证
+        checkName("#name", "#nameInfo");
+    }).focus(function () {
+        clearInfo("#nameInfo");
+    });
+    //验证
+    function checkName(id, info) {
+        var reg = /^[\u4E00-\u9FA5]{2,4}$/;
+        var $name = $(id).val();
+        if (!reg.test($name)) {
+            setInfo(info, "请输入真实姓名");
+            return false;
+        }
+        return true;
+    }
+	
+    //手机号
+    $("#tel").blur(function () {
+        //对手机号进行验证
+        checkTel("#tel", "#telInfo");
+    }).focus(function () {
+        clearInfo("#telInfo");
+    });
+    //验证
+    function checkTel(id, info) {
+        var reg = /^[1][0-9]{10}$/;
+        var $tel = $(id).val();
+        if (!reg.test($tel)) {
+            setInfo(info, "手机号格式不正确");
+            return false;
+        }
+        return true;
+    }
+	//身份证号
+	$("#idNumber").blur(function () {
+		checkId("#idNumber", "#idInfo");
+	}).focus(function () {
+		clearInfo("#idInfo");
+	});
+	//验证
+	function checkId(id, info) {
+		var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+		var $idNumber = $(id).val();
+		if (!reg.test($idNumber)) {
+			setInfo(info, "请输入有效身份证号码");
+			return false;
+		}
+		return true;
+	}
+	//地址验证
+	$("#adress").blur(function () {
+		checkAdress("#adress", "#adressInfo");
+	}).focus(function () {
+		clearInfo("#adressInfo");
+	});
+	//验证
+	function checkAdress(id, info) {
+		var reg = /^[\u4e00-\u9fa5\w]{10,20}$/;
+		var $adress = $(id).val();
+		if (!reg.test($adress)) {
+			setInfo(info, "请输入10-20位字符");
+			return false;
+		}
+		return true;
+	}
+
+	$('#area').blur(function () {
+		checkArea("#area", "#areaInfo");
+	}).focus(function () {
+		clearInfo("#adressInfo");
+	});
+	function checkArea(id, info) {
+		var $area = $(id).val();
+		if ($area =='') {
+			setInfo('#areaInfo','不能为空')
+			return false
+		}
+		return true;
+	}
+
+	$('#monney').blur(function () {
+		checkMoney("#monney", "#monneyInfo");
+	}).focus(function () {
+		clearInfo("#monneyInfo");
+	});
+	function checkMonney(id, info) {
+		var $monney = $(id).val();
+		if ($monney =='') {
+			setInfo('#monneyInfo','不能为空')
+			return false
+		}
+		return true;
+	}
+    //设置错误信息
+    function setInfo(id, info) {
+        $(id).text(info);
+    }
+    //清空错误信息
+    function clearInfo(id) {
+        $(id).text("");
+    }
+
+    function checkAll() {
+        if (checkTel('#tel','#telInfo')&checkName('#name','#nameInfo')&checkId("#idNumber", "#idInfo")&checkAdress("#adress", "#adressInfo")&checkArea('#area','areaInfo') &checkMonney('#monney','monneyInfo')) {
+            return true;
+        }
+        return false;
+    };
+    //校验所有表单元素的内容
+    $("#form").submit(function () {
+        return checkAll();
+    })
+</script>
+
+{% endblock %}

@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %}
+    河南嘉禾智慧科技农业-技术视频
+{% endblock %}
+
+{% block menu %}
+        <div class="nav well">
+            <div class="container">
+                <div class="row">
+                    <div class="logo col-md-4">
+                        <a href="{% url 'jh:index' %}"><img src="{% static '/htmlimg/logo.png' %}" alt=""></a>
+                    </div>
+                    <div class="col-md-8 pull-right">
+                        <ul class="menu">
+                            <li><a href="{% url 'jh:index' %}" >首页</a></li>
+                            <li><a href="{% url 'jh:finance' %}" >农业金融</a></li>
+                            <li><a href="{% url 'goods:goods' %}" >农资团购</a></li>
+                            <li><a href="{% url 'jh:news' 1 1 %}">农业资讯</a></li>
+                            <li><a href="{% url 'teach:teach' %}" class="seclted">农技服务</a></li>
+                            <li><a href="{% url 'cir:cir' %}">农产品流通</a></li>
+                            <li><a href="{% url 'jh:company' %}">关于我们</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+{% endblock %}
+{% block bann %}
+
+{% endblock %}
+{% block content %}
+  <!--container区域-->
+  <div class="course-bt">
+        <p>当前位置：<a href="{% url 'teach:teach' %}">{{ video.video_category.first }}</a>
+            &nbsp;>&nbsp;
+            <a href="{% url 'teach:video_list' 'recom' %}">{{ video.video_type.first }}</a>
+            &nbsp;>&nbsp;
+            {{ video.title }}
+        </p>
+        <h3>苗床及育苗土管理</h3>
+    </div>
+  <div class="course-player" style="height: 1300px">
+    <!--播放区域开始-->
+    <div class="play-cont">
+      <!--播放区域左侧开始-->
+      <div class="play-left">
+        <video id="video1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none" width="915" height="560"
+      poster="{{ video.img.url  }}"
+      data-setup="{}" autoplay=''>
+            <source src="http://source.nongguanjia.com/Z5D0081.mp4" type='video/mp4' />
+          <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
+          <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />
+
+          <p class="vjs-no-js">
+            To view this video please enable JavaScript, and consider upgrading to a web browser that
+            <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+          </p>
+        </video>
+        <div class="play-bottom">
+
+          <span class="sp-b">{{ video.times }}</span>
+          <span class="sp-br">
+             <a href="" style="color: bisque">收藏</a>
+          </span>
+        </div>
+      </div>
+      <!--播放区域左侧结束-->
+      <!--播放右侧推荐开始-->
+      <div class="play-right">
+        <h3>课程小节</h3>
+        <div class="course-t">
+          <ul>
+            <li>
+                <a href="">
+                  <img src="{{ video.img.url }}" alt="" style="cursor:pointer;"></a>
+                <p>
+                  <span>{{ video.title }}</span>
+                  <span class="p1" style="color: #9998c6">{{ video.expert.first.name }}</span>
+                </p>
+              </li>
+             </ul>
+        </div>
+      </div>
+      <!--播放右侧推荐结束-->
+      <div class="clear"></div>
+    </div>
+    <!--播放区域结束-->
+    <!--播放底部开始-->
+    <div class="play-cont-text">
+      <!--左侧详细信息开始-->
+      <div class="text-l" id="text-l">
+        <ul>
+          <li>
+            <a class="sec-p" onclick="bf(this, 'sec-p')" href="#kc">课程简介</a>
+          </li>
+          <li>
+            <a onclick="bf(this, 'sec-p')" href="#zj">主讲专家</a>
+          </li>
+          <li>
+            <a onclick="bf(this, 'sec-p')" href="#cg">成功案例</a>
+          </li>
+         <!--  <li>
+            <a onclick="bf(this, 'sec-p')"  href="#pl">评论</a>
+          </li> -->
+        </ul>
+        <div class="text-con" id="kc">
+          <h4>课程简介</h4>
+          <hr style="height:1px;border:none;border-top:1px solid #eee; margin-top:10px;">
+          <div class="p-t p-text">{{ video.desc }}</div>
+        </div>
+        <div class="text-con" id="zj">
+          <h4>主讲专家</h4>
+          <hr style="height:1px;border:none;border-top:1px solid #eee; margin-top:10px">
+          <div class="card">
+              <div class="card-t">
+                <img src="{{ video.expert.first.pic.url }}" alt="头像">
+                <p>
+                  {{ video.expert.first.name }}<span class="pt">（权威专家）</span>
+                </p>
+                <p>
+                  <span>专业领域：{{ video.expert.first.professional }}</span>
+             </p>
+                  <p class="t4"><span>从业时间：{{ video.expert.first.time }}</span><p>
+
+              </div>
+              <div class="card-b">{{ video.expert.first.name }}  {{ video.expert.first.get_sex_display }}  {{ video.expert.first.age }}岁  {{ video.expert.first.desc }}</div>
+            </div>          <div class="clear"></div>
+        </div>
+
+        <div class="text-con" id="cg">
+          <h4>成功案例</h4>
+          <hr style="height:1px;border:none;border-top:1px solid #eee; margin-top:10px;">
+          <div class="p-t p-img">暂无相关案例展示</div>
+        </div>
+
+                <div class="clear"></div>
+              </div>
+              <!--左侧详细信息结束-->
+              <!--右侧推荐开始-->
+              <div class="text-r" id="text-r">
+                <h3>相关推荐</h3>
+                <ul>
+                  <li>
+                      <a href="">
+                        <img src="{% static 'picture/14479235589873_index1.jpg' %}" alt=""></a>
+                      <p>
+                        <a href="">
+                          <span>夏季小番茄的施肥管理技术</span>
+                        </a>
+                        <span class="p1">特约嘉宾</span>
+                      </p>
+                    </li><li>
+                      <a href="">
+                        <img src="{% static 'picture/14514776667474_index1.jpg' %}" alt=""></a>
+                      <p>
+                        <a href="">
+                          <span>温室大棚番茄熊蜂授粉技术</span>
+                        </a>
+                        <span class="p1">特约嘉宾</span>
+                      </p>
+                    </li>                </ul>
+                <div class="clear"></div>
+              </div>
+              <!--右侧推荐结束--> </div>
+            <!--播放底部开始-->
+            <div class="clear"></div>
+          </div>
+          <!--container区域结束-->
+{% endblock %}
+
+
+
+
+
+
+
+
+

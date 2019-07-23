@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    河南嘉禾智慧科技农业-商品页
+{% endblock %}
+
+{% block head %}
+
+{% endblock %}
+  {% block menu %}
+      <div class="nav well" xmlns="http://www.w3.org/1999/html">
+            <div class="container">
+                <div class="row">
+                    <div class="logo col-md-4">
+                        <a href="{% url 'jh:index' %}"><img src="{% static '/htmlimg/logo.png' %}" alt=""></a>
+                    </div>
+                    <div class="col-md-8 pull-right">
+                        <ul class="menu">
+                            <li><a href="{% url 'jh:index' %}" >首页</a></li>
+                            <li><a href="{% url 'jh:finance' %}" >农业金融</a></li>
+                            <li><a href="{% url 'goods:goods' %}" class="seclted">农资团购</a></li>
+                            <li><a href="{% url 'jh:news' 1 1 %}">农业资讯</a></li>
+                            <li><a href="{% url 'teach:teach' %}">农技服务</a></li>
+                            <li><a href="{% url 'cir:cir' %}">农产品流通</a></li>
+                            <li><a href="{% url 'jh:company' %}">关于我们</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    {% endblock %}
+
+{% block bann %}
+
+{% endblock %}
+{% block content %}
+<link href="/static/css/page.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/javascript/jquery.js"></script>
+<script type="text/javascript" src="/static/javascript/coursetab.js"></script>
+
+<!--content内容开始-->
+<div class="tuan-all" style="height: auto">
+	<!--推荐商品-->
+	<h1 class="h1"><img class="img1" src="/static/picture/icon-fl.png" alt="">
+        <span>商品分类</span>
+        <span class="span1"><!-- <a class="sec" href="#">推荐</a> -->
+            {% for cate in categorys %}
+                <a {% if cate == type %} class="sec" {% else %} class="" {% endif %} href="{% url 'goods:goods_list' cate.id %}">{{ cate.category_name }}</a>
+            {% endfor %}
+        </span>
+    </h1>
+
+                {% if category_id == 1 %}
+                    <div class="container">
+                        <ul class="goodList">
+                    {% for popular in populars %}
+                        <li>
+                            <div>
+                                <img src="{{ popular.pic.url }}" alt="" >
+                            </div>
+                            <p>[{{ popular.category.category_name }}]{{ popular.goods_name|truncatechars:14 }}</p>
+                            <p>{{ popular.goods_origin.origin_name }}</p>
+                            <p>￥ {{ popular.price }}</p>
+                          <p><a href="{% url 'goods:goods_detail'  popular.id 'detail' %}" style="color: #f6faf1">立即购买</a></p>
+                      </li>
+                    {% endfor %}
+                        </ul>
+                     </div>
+                {% else %}
+                    <div class="container">
+                        <ul class="goodList">
+                            {% for good in goods %}
+                             <li>
+                                <div>
+                                    <img src="{{ good.pic.url }}" alt="">
+                                </div>
+                                <p>[{{ good.category.category_name }}]{{ good.goods_name }}</p>
+                                <p>{{ good.goods_origin.origin_name }}</p>
+                                <p>￥ 暂无</p>
+                                <p>立即购买</p>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+        <div class="clear"></div>
+        <div class="fenye"><div>
+    </div>
+	</div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

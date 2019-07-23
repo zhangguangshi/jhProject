@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    河南嘉禾智慧科技农业-农业金融
+{% endblock %}
+ {% block menu %}
+    <div class="nav well">
+            <div class="container">
+                <div class="row">
+                    <div class="logo col-md-4">
+                        <a href="{% url 'jh:index' %}"><img src="{% static '/htmlimg/logo.png' %}" alt=""></a>
+                    </div>
+                    <div class="col-md-8 pull-right">
+                        <ul class="menu">
+                            <li><a href="{% url 'jh:index' %}" >首页</a></li>
+                            <li><a href="{% url 'jh:finance' %}" class="seclted">农业金融</a></li>
+                            <li><a href="{% url 'goods:goods' %}">农资团购</a></li>
+                            <li><a href="{% url 'jh:news' 1 1 %}">农业资讯</a></li>
+                            <li><a href="{% url 'teach:teach' %}">农技服务</a></li>
+                            <li><a href="{% url 'cir:cir' %}">农产品流通</a></li>
+                            <li><a href="{% url 'jh:company' %}">关于我们</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    {% endblock %}
+
+
+{% block bann %}
+    <div class="" style="display: flex;justify-content: center;align-items: center">
+
+   <img  src="/static/htmlimg/14657130874485.jpg" alt="">
+  </div>
+
+
+{% endblock %}
+{% block content %}
+
+<link href="/static/css/common.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/javascript/coursetab.js"></script>
+
+
+
+    <!--banner切换-->
+{#     <div class="course-banner course-banner3" style="background-image:url(http://app.nongguanjia.com/static/certificate/2016/0325/14588997352173.jpg)">#}
+{#       <div id="boxshow1">#}
+{#        <div class="smalltitle"></div>#}
+{#     <ul class="oUlplay">#}
+{#      <li>#}
+{#       <img  src="/static/htmlimg/14657130874485.jpg" alt="">#}
+{#      </li>#}
+{#     </ul>#}
+{#       </div>#}
+{#    </div>#}
+{#  </div>#}
+  <!--banner切换结束-->
+
+
+
+  <!--金融内容开始-->
+  <div class="jinrong-content">
+      <div class="jr-con">
+          <div class="jr-l"><img src="/static/htmlimg/finance_picture.jpg" alt="" style="width: 299px;height: 387px"></div>
+          <div class="jr-m"><img src="/static/htmlimg/nongzi2.jpg" alt=""></div>
+          <div class="jr-r"><a href="{% url 'fina:finance_con' %}" target="_blank"></a></div>
+      </div>
+      <div class="jr-con">
+          <div class="jr-l"><img src="/static/htmlimg/nongji1.jpg" alt=""></div>
+          <div class="jr-m"><img src="/static/htmlimg/nongji2.jpg" alt=""></div>
+          <div class="jr-r"><a href="{% url 'fina:finance_con' %}" target="_blank"></a></div>
+      </div>
+      <div class="jr-con">
+          <div class="jr-l"><img src="/static/htmlimg/nongchanpin1.jpg" alt=""></div>
+          <div class="jr-m"><img src="/static/htmlimg/nongchanpin2.jpg" alt=""></div>
+          <div class="jr-r"><a href="{% url 'fina:finance_con' %}" target="_blank"></a></div>
+      </div>
+      <div class="nongyehrzuo">
+         <a href="" target="_blank"></a>
+      </div>
+  </div>
+  <!--金融内容结束-->
+
+{% endblock %}
+

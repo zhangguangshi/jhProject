@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>嘉禾智慧农业-登录</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/commen.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script type="text/javascript" src="{% static 'javascript/jquery.js' %}"></script>
+</head>
+
+<body>
+    <div class="top hidden-xs">
+        <div class="container">
+            <div class="row">
+                <div class="top_l">
+                    <span>欢迎光临嘉禾智慧农业！</span>
+                    <a href="{% url 'user:login' %}">请登录</a>
+                    <a>/</a>
+                    <a href="{% url 'user:register' %}">注册</a>
+                </div>
+                <div class="top_r">
+                    <ul class="hidden-xs">
+                        <li><a href="">关注嘉禾</a></li>
+                        <li><a href="">帮助中心</a></li>
+                        <li><a href="{% url 'jh:company'  %}">关于嘉禾</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="nav well">
+        <div class="container">
+            <div class="row">
+                <div class="logo col-md-2">
+                    <a href="{% url 'jh:index' %}">  <img src="{% static 'htmlimg/logo.png' %}" alt=""></a>
+
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="login_form_bg">
+        <div class="login_form_wrap clearfix">
+            <div class="login_banner fl"></div>
+            <div class="login_form fr">
+                <div class="login_title clearfix">
+                    <h1>用户登录</h1>
+                    <a href="{% url 'user:register' %}">立即注册</a>
+                </div>
+                <div class="form_input">
+                    <form action="{% url 'user:login' %}" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="username" class="name_input" placeholder="请输入手机号">
+                        <div class="user_error"></div>
+                        <input type="password" name="pwd" class="pass_input" placeholder="请输入密码">
+                        <div class="pwd_error"></div>
+                        <div class="more_input clearfix">
+                            <input type="checkbox" name="">
+                            <label>记住用户名</label>
+                            <a href="{% url 'user:update_pwd' %}">忘记密码</a>
+                        </div>
+                        <input type="submit" name="" value="登录" class="input_submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="{% static 'javascript/commen-foot.js' %}"></script>
+<script>
+    $(function () {
+        var user_error = false;
+        var password_error = false;
+
+        $('.name_input').blur(function () {
+            if ($(this).val() =='') {
+                $('.user_error').html("请输入已注册手机号").show();
+                user_error = true;
+            }else{
+                //如果已经输入那就隐藏错误信息
+                $('.user_error').hide();
+                user_error = false;
+            }
+        });
+        $('pass_input').blur(function () {
+            if ($(this).val()==""){
+                $('.pwd_error').html('请输入密码').show();
+                password_error = true;
+            }else {
+                $('.pwd_error').hide();
+                password_error = false;
+            }
+        });
+
+        $('form').submit(function () {
+            username = $('.name_input').val();
+            password = $('.pass_input').val();
+
+            if (username==''){
+                user_error = true;
+            }
+            if (password==''){
+                password_error=true;
+            }
+            if (user_error===false && password_error===false){
+                //只有用户和密码同时输入的时候才不阻止提交
+                return true;
+            }else{
+                return false;
+            }
+        })
+        if(1=={{ is_user }}){
+            $('.user_error').html('手机号错误或未注册').show();
+        }else if (1=={{ is_password }}){
+            $('.pwd_error').html('密码错误').show();
+        }
+
+    })
+</script>
+</html>

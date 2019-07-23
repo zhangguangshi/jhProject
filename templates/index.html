@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    河南嘉禾智慧科技农业-创新农业互联网服务平台
+{% endblock %}
+
+{% block menu %}
+        <div class="nav well">
+            <div class="container">
+                <div class="row">
+                    <div class="logo col-md-4 hidden-sm ">
+                        <a href=""><img src="{% static '/htmlimg/logo.png' %}" alt=""></a>
+                    </div>
+                    <div class="logo col-sm-1 visiable-sm hidden-lg" style="margin-top:20px;margin-left:15px;"><a href=""><img src="{% static 'htmlimg/logoMini.jpg' %}" alt=""></a>
+</div>
+                    <div class="col-md-8 pull-right col-sm-10">
+                        <ul class="menu">
+                            <li><a href="{% url 'jh:index' %}" class="seclted">首页</a></li>
+                            <li><a href="{% url 'jh:finance' %}" >农业金融</a></li>
+                            <li><a href="{% url 'goods:goods' %}" >农资团购</a></li>
+                            <li><a href="{% url 'jh:news' 1 1 %}">农业资讯</a></li>
+                            <li><a href="{% url 'teach:teach' %}" >农技服务</a></li>
+                            <li><a href="{% url 'cir:cir' %}">农产品流通</a></li>
+                            <li><a href="{% url 'jh:company' %}">关于我们</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+{% endblock %}
+
+{% block content %}
+﻿<link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="{% static 'javascript/zzsc.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascript/index.js' %}"></script>
+    <!--内容部分开始-->
+
+    <div class="ban-show" style="display: none;">
+       <div class="ban-show-m">
+           <ul>
+               <li class="dai"><a href="" target="_blank">想贷款</a></li>
+               <li class="tuan"><a href="" target="_blank">买农资</a></li>
+               <li class="kan"><a href="" target="_blank">学农技</a></li>
+               <li class="mai"><a href="" target="_blank">想卖农产品</a></li>
+           </ul>
+       </div>
+    </div>
+    <!--内容部分-->
+   <!-- 农产品团购 -->
+    <div class="container goods">
+        <h2>农资团购</h2>
+        <p class="English_title">THE GOODS</p>
+        <div class="row list">
+            <div class=" col-md-4 box hidden-sm hidden-xs">
+                <div class="front"><img src="{% static '/htmlimg/img41.jpg' %}"></div>
+                <div class="backface">
+                    <h3>黄金玉米</h3>
+                    <p>玉米植株高大，茎强壮，是重要的粮食作物和饲料作物，其种植面积和总产量仅次于水稻和小麦。一直都被誉为长寿食品，具有开发高营养、高生物学功能食品的巨大潜力。</p>
+                </div>
+            </div>
+            <div class="box col-md-4 hidden-sm hidden-xs">
+                <div class="front"><img src="{% static '/htmlimg/14344269918009_index1.jpg' %}"></div>
+                <div class="backface">
+                    <h3>优质麦子</h3>
+                    <p>营养比较丰富、经济价值较高的商品粮。小麦籽粒含有丰富的淀粉、较多的蛋白质、少量的脂肪，还有多种矿质元素和维生素B。小麦属温带长日照植物，适应范围广，居于栽培谷物之首。</p>
+                </div>
+            </div>
+            <div class="box col-md-4 hidden-sm hidden-xs">
+                <div class="front"><img src="{% static '/htmlimg/14607108099787_index1.jpg' %}"></div>
+                <div class="backface">
+                    <h3>优质番茄</h3>
+                    <p>番茄内的苹果酸和柠檬酸等有机酸，番茄中含有的果酸，能降低胆固醇的含量，对高血脂症很有益处。润肠通便所含苹果酸、柠檬酸等有机酸，对脂肪及蛋白质的消化。增加胃酸浓度，调整胃肠功能</p>
+                </div>
+            </div>
+            <div class="visible-sm row">
+                    <div class="front col-sm-4 "><img src="{% static '/htmlimg/img41.jpg' %}"></div>
+                    <div class="backface col-sm-5">
+                        <h3>黄金玉米</h3>
+                        <p>玉米植株高大，茎强壮，是重要的粮食作物和饲料作物，其种植面积和总产量仅次于水稻和小麦。一直都被誉为长寿食品，具有开发高营养、高生物学功能食品的巨大潜力。</p>
+                    </div>
+                </div>
+                <div class="visible-sm row">
+                    <div class="front col-sm-4 "><img src="{% static '/htmlimg/14344269918009_index1.jpg' %}"></div>
+                    <div class="backface col-sm-5 ">
+                        <h3>优质麦子</h3>
+                        <p>营养比较丰富、经济价值较高的商品粮。小麦籽粒含有丰富的淀粉、较多的蛋白质、少量的脂肪，还有多种矿质元素和维生素B。小麦属温带长日照植物，适应范围广，居于栽培谷物之首。</p>
+                    </div>
+                </div>
+                <div class="visible-sm row">
+                    <div class="front col-sm-4 "><img src="{% static '/htmlimg/14607108099787_index1.jpg' %}"></div>
+                    <div class="backface col-sm-5 ">
+                        <h3>优质番茄</h3>
+                        <p>番茄内的苹果酸和柠檬酸等有机酸，番茄中含有的果酸，能降低胆固醇的含量，对高血脂症很有益处。润肠通便所含苹果酸、柠檬酸等有机酸，对脂肪及蛋白质的消化。增加胃酸浓度，调整胃肠功能</p>
+                    </div>
+                </div>
+                <div class="visible-xs row">
+                        <div class="front col-xs-5"><img src="{% static '/htmlimg/img41.jpg' %}"></div>
+                        <div class="backface col-sm-5 col-xs-6">
+                            <h3>黄金玉米</h3>
+                            <p>玉米植株高大，茎强壮，是重要的粮食作物和饲料作物，其种植面积和总产量仅次于水稻和小麦。一直都被誉为长寿食品，具有开发高营养、高生物学功能食品的巨大潜力。</p>
+                        </div>
+                    </div>
+                    <div class="visible-xs row">
+                        <div class="front col-xs-5"><img src="{% static '/htmlimg/14344269918009_index1.jpg' %}"></div>
+                        <div class="backface col-sm-5 col-xs-6">
+                            <h3>优质麦子</h3>
+                            <p>营养比较丰富、经济价值较高的商品粮。小麦籽粒含有丰富的淀粉、较多的蛋白质、少量的脂肪，还有多种矿质元素和维生素B。小麦属温带长日照植物，适应范围广，居于栽培谷物之首。</p>
+                        </div>
+                    </div>
+                    <div class="visible-xs row">
+                        <div class="front col-xs-5"><img src="{% static '/htmlimg/14607108099787_index1.jpg' %}"></div>
+                        <div class="backface col-sm-5 col-xs-6">
+                            <h3>优质番茄</h3>
+                            <p>番茄内的苹果酸和柠檬酸等有机酸，番茄中含有的果酸，能降低胆固醇的含量，对高血脂症很有益处。润肠通便所含苹果酸、柠檬酸等有机酸，对脂肪及蛋白质的消化。增加胃酸浓度，调整胃肠功能。</p>
+                        </div>
+                    </div>
+        </div>
+    </div>
+    <!-- 新闻 -->
+    <div class="container new_moudule">
+        <h2 class="Chinese_title">新闻资讯</h2>
+        <p class="English_title">THE NEWS</p>
+        <p class="border"><span class="glyphicon glyphicon-chevron-down"></span></p>
+        <p id="seemore"><a href="{% url 'jh:news' 1  1%}">MORE<span class="glyphicon glyphicon-arrow-right"></span></a></p>
+        <div class="row hidden-sm news">
+            <div class="col-md-4">
+                <dt>
+                    <h4>县农业农村局到毛尖山乡指导桑园病虫害防治工作</h4>
+                    <p class="date">2019-05-17</p>
+                    <p>县农业农村局总农艺师胡志红带领植保站、蚕桑局负责人到毛尖山乡指导桑园病虫害防治工作。根据群众反映，林河村部分桑园春季多种病虫害多发现象比较严重。群众利益无小事，胡志红一行深入桑园基地，现场查看和询问了解，初步确定了该区域桑园病虫为害原因和程度，并取样和拍照，有针对性地就综合防治和后期管理工作对当地蚕农进行了及时指导。胡志红要求，力争在保证养蚕安全的前提下，有效控制桑园病虫害，确保春季蚕桑正常生产</p>
+                </dt>
+                <dd><img src="{% static '/images/xinwen1.jpg' %}" alt=""></dd>
+            </div>
+            <div class="col-md-4">
+                <dd><img src="{% static '/images/xinwen2.jpg' %}" alt=""></dd>
+                <dt>
+                    <h4>智慧农业创新发展研讨会召开</h4>
+                    <p class="date">2019-05-10</p>
+                    <p>由农民日报社主办的智慧农业创新发展研讨会在北京召开，相关部委代表、专家学者、企业及地方政府代表齐聚一堂，共议在乡村振兴战略指引下，智慧农业发展的典型经验、发展理念、未来走向等议题。与各地政府、企业深入合作，进行园区托管，全面引入从技术到市场的服务等方面的成功经验。</p>
+                </dt>
+            </div>
+            <div class="col-md-4">
+                <dt>
+                    <h4>国内菜油行业再度退守“防线”或迟早再度退守“防线”</h4>
+                    <p class="date">2018-09-10</p>
+                    <p>[中国，上海，2019 年 4 月 25 日] 在 2019 年华为全球金融峰会期间，华为联合业界领先的银行解决方案提供商四方精创（Forms
+                        Syntron）联合发布面向金融行业的分布式开放平台解决方案“Fincube ”，帮助各种规模的银行客户更好地迎接“银行 4.0
+                        ”时代的挑战，降低创新成本，全面优化技术，持续提升业务开放能力，从而使银行客户的体验不断得到加强。</p>
+                </dt>
+                <dd><img src="{% static '/images/3.jpg' %}" alt=""></dd>
+            </div>
+        </div>
+        <div class="row news visible-sm">
+                <div class="row">
+                        <dd class="col-sm-4"><img src="{% static '/images/xinwen1.jpg' %}" alt=""></dd>
+
+                    <dt class="col-sm-6">
+                        <h4>县农业农村局到毛尖山乡指导桑园病虫害防治工作</h4>
+                        <p class="date">2019-05-17</p>
+                        <p>县农业农村局总农艺师胡志红带领植保站、蚕桑局负责人到毛尖山乡指导桑园病虫害防治工作。根据群众反映，林河村部分桑园春季多种病虫害多发现象比较严重。群众利益无小事，胡志红一行深入桑园基地，现场查看和询问了解，初步确定了该区域桑园病虫为害原因和程度，并取样和拍照，有针对性地就综合防治和后期管理工作对当地蚕农进行了及时指导。胡志红要求，力争在保证养蚕安全的前提下，有效控制桑园病虫害，确保春季蚕桑正常生产</p>
+                    </dt>
+                </div>
+                <div class="row">
+                    <dd class="col-sm-4"><img src="{% static '/images/xinwen2.jpg' %}" alt=""></dd>
+                    <dt class="col-sm-6">
+                        <h4>智慧农业创新发展研讨会召开</h4>
+                        <p class="date">2019-05-10</p>
+                        <p>由农民日报社主办的智慧农业创新发展研讨会在北京召开，相关部委代表、专家学者、企业及地方政府代表齐聚一堂，共议在乡村振兴战略指引下，智慧农业发展的典型经验、发展理念、未来走向等议题。与各地政府、企业深入合作，进行园区托管，全面引入从技术到市场的服务等方面的成功经验。</p>
+                    </dt>
+                </div>
+                <div class="row">
+                        <dd class="col-sm-4"><img src="{% static '/images/3.jpg' %}" alt=""></dd>
+
+                    <dt class="col-sm-6">
+                        <h4>国内菜油行业再度退守“防线”或迟早再度退守“防线”</h4>
+                        <p class="date">2018-09-10</p>
+                        <p>[中国，上海，2019 年 4 月 25 日] 在 2019 年华为全球金融峰会期间，华为联合业界领先的银行解决方案提供商四方精创（Forms
+                            Syntron）联合发布面向金融行业的分布式开放平台解决方案“Fincube ”，帮助各种规模的银行客户更好地迎接“银行 4.0
+                            ”时代的挑战，降低创新成本，全面优化技术，持续提升业务开放能力，从而使银行客户的体验不断得到加强。</p>
+                    </dt>
+                </div>
+            </div>
+        </div>
+    <!-- 关于我们 -->
+    <div id="aboutUsWrap">
+        <div class="aboutUs container">
+            <h1>ABOUT US</h1>
+            <div class="intro">
+                <h2>关于我们</h2>
+                <p class="English_title">ABOUT US</p>
+                <p class="intro_p">&nbsp;&nbsp;&nbsp;&nbsp;河南嘉禾智慧农业科技公司现为国家科技型企业，河南省智慧农业物联网云应用工程研究中心、郑州市高校就业见习基地、新型职业农人培训专家单位、中英农业国际联合实验基地，农科院所技术合作单位、国家现代农业信息应用技术支持单位，公司专业从事智慧农业物联网技术开发、农业生产组织关系创新研究，农业大数据，智慧种植、养殖传感器研发、系统集成，北斗导航和高分卫星遥感技术在农业应用研究。
+                </p>
+            </div>
+            <ul class="about">
+                <li>
+                    <p>一流的技术支持</p>
+                    <div><img src="{% static '/images/surport.jpg' %}" alt=""></div>
+                </li>
+                <li>
+                    <p>专业的科研团队</p>
+                    <div><img src="{% static 'images/team.jpg' %}" alt=""></div>
+                </li>
+                <li>
+                    <p>高效的金融服务</p>
+                    <div><img src="{% static '/images/timg.jpg' %}" alt=""></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container analyze">
+        <div><h2>嘉禾智慧农业大数据雨水分析</h2><div class="yushui"><img src="{% static '/htmlimg/yushui.png' %}" alt=""></div></div>
+        <div><h2>嘉禾智慧农业大数据风力分析</h2><div class="fengli"><img src="{% static '/htmlimg/fengli.png' %}" alt=""></div></div>
+        <div><h2>嘉禾智慧农业大数据温度分析</h2><div class="wendu"><img src="{% static '/htmlimg/wendu.png' %}" alt=""></div></div>
+        <div><h2>嘉禾智慧农业墒情监测分析</h2><div class="shangqing"><img src="{% static '/htmlimg/shangqing.png' %}" alt=""></div></div>
+    </div>
+
+<script>
+    $("#myCarousel").carousel({
+        interval: 2000,
+        pause: 'hover'
+    })
+</script>
+
+
+       <!--内容部分结束-->
+        <!--友情链接-->
+{#       <div class="link" style="text-align: center;width: 80%">#}
+{#       <span style="margin-right:28px;display:block">友情链接:</span>#}
+{#            <a href="http://www.caas.net.cn/" target="_blank">中国农科院</a>#}
+{#            <a href="http://www.natesc.agri.cn/" target="_blank">全国农技推广服务中心</a>#}
+{#            <a href="http://www.nyjycbs.com" target="_blank">农业教育声像出版社</a>#}
+{#            <a href="http://www.cma.gov.cn/" target="_blank">中国气象局</a>#}
+{#            <a href="https://www.unops.org/english/Pages/Home.aspx" target="_blank">UNOPS</a>#}
+{#            <a href="http://www.cau.edu.cn/" target="_blank">中国农业大学</a>#}
+{#            <a href="http://web02.sdau.edu.cn" target="_blank">山东农业大学</a>#}
+{#            <a href="http://www.abchina.com/cn" target="_blank">中国农业银行</a>#}
+{#            <a href="http://www.psbc.com/portal/zh_CN/index.html" target="_blank">中国邮政储蓄银行</a>#}
+{#            <a href="http://bank.ecitic.com/" target="_blank">中信银行</a>#}
+{#            <a href="http://www.lj-bank.com" target="_blank">龙江银行</a>#}
+{#            <a href="http://www.cmbchina.com" target="_blank">招商银行</a>#}
+{#            <a href="https://www.leqian.com/" target="_blank">乐钱</a>#}
+{#            <a href="https://www.lequlai.com" target="_blank">乐趣来</a>#}
+{#            <a href="http://www.creditease.cn" target="_blank">宜信</a>#}
+{#            <a href="http://www.dbn.com.cn/" target="_blank">大北农集团</a>#}
+{#            <a href="http://www.kingenta.com" target="_blank">金正大国际</a>#}
+{#            <a href="http://www.shikefeng.cn" target="_blank">施可丰</a>#}
+{#            <a href="http://www.genliduo.com" target="_blank">根力多</a>#}
+{#            <a href="http://www.liuguo.com" target="_blank">六国化工</a>#}
+{#            <a href="http://www.sdndfy.com" target="_blank">农大肥业</a>#}
+{#            <a href="http://www.shuifei168.com" target="_blank">水肥网</a>#}
+{#            <a href="http://mall.51zhongzi.com/index.html" target="_blank">爱种网</a>#}
+{#            <a href="http://www.bwkcrop.com" target="_blank">未名农业</a>#}
+{#            <a href="http://www.dowagro.com/zh-CN/china" target="_blank">陶氏益农</a>#}
+{#            <a href="http://www.16899.com/" target="_blank">农一网</a>#}
+{#            <a href="http://www.veyong.com" target="_blank">威远生化</a>#}
+{#            <a href="http://www.sinograin.com.cn" target="_blank">中储粮</a>#}
+{#            <a href="http://www.brightfood.com/cn" target="_blank">光明食品</a>#}
+{#            <a href="http://www.bjlsjt.com" target="_blank">京粮集团</a>#}
+{#            <a href="http://www.jnjym.com" target="_blank">金玉米</a>#}
+{#            <a href="http://www.wugu.com.cn" target="_blank">吾谷网</a>#}
+{#            <a href="http://www.xnz360.com" target="_blank">新农资360网</a>#}
+{#            <a href="http://www.365sn.cn" target="_blank">溯农</a>#}
+{#            <a href="http://www.zhiweinong.net" target="_blank">知为农</a>#}
+{#       </div>#}
+       <!--友情链接结束-->
+
+{% endblock  %}
+
