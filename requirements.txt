@@ -35,7 +35,7 @@ MarkupSafe==1.1.1
 monotonic==1.5
 mysql==0.0.2
 mysqlclient==1.4.2.post1
-numpy==1.16.2
+numpy==1.22.0
 parsel==1.5.1
 Pillow==5.4.1
 pyasn1==0.4.4
